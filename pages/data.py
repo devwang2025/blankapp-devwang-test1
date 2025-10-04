@@ -2,6 +2,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import os
+
+# 한글 폰트 설정 (NanumGothic-Regular.ttf)
+font_path = os.path.join(os.path.dirname(__file__), '..', 'fonts', 'NanumGothic-Regular.ttf')
+fontprop = fm.FontProperties(fname=font_path)
+plt.rc('font', family=fontprop.get_name())
+plt.rcParams['axes.unicode_minus'] = False
 
 st.title("데이터 분석 및 시각화 예시")
 
@@ -30,7 +38,7 @@ st.bar_chart(df.set_index('연도')['고객수'])
 st.header("매출과 고객수 산점도 (Matplotlib)")
 fig, ax = plt.subplots()
 ax.scatter(df['매출'], df['고객수'])
-ax.set_xlabel('매출')
-ax.set_ylabel('고객수')
-ax.set_title('매출 vs 고객수')
+ax.set_xlabel('매출', fontproperties=fontprop)
+ax.set_ylabel('고객수', fontproperties=fontprop)
+ax.set_title('매출 vs 고객수', fontproperties=fontprop)
 st.pyplot(fig)
